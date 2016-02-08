@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 16:58:45 2016 marc brout
-** Last update Mon Feb  8 19:38:31 2016 marc brout
+** Last update Mon Feb  8 20:58:00 2016 marc brout
 */
 
 #include <stdio.h>
@@ -46,6 +46,18 @@ int		verif_nballum(char *str, int *allum, int line)
   return (test);
 }
 
+int		check_tab(int *allum, int h)
+{
+  int		i;
+  int		total;
+
+  total = 0;
+  i = -1;
+  while (++i < h + 2)
+    total += allum[i];
+  return (total);
+}		
+
 void		launch_game(char **tab, int *allum, int h)
 {
   char		*answer;
@@ -82,7 +94,7 @@ char		allum(int h)
     return (1);
   set_tab(tab, allum, h);
   show_tab(tab);
-  while (42)
+  while (check_tab(allum, h))
     launch_game(tab, allum, h);
   free_tabs(tab, allum);
   return (0);
