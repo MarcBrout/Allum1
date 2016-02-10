@@ -5,97 +5,57 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 16:58:45 2016 marc brout
-** Last update Mon Feb  8 20:58:00 2016 marc brout
+** Last update Wed Feb 10 18:29:37 2016 marc brout
 */
 
-#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "allum.h"
-#include "get_next_line.h"
 
-int		verif_line(char *str, int *allum, int h)
+char		show_loser(int player, int *allum, int h)
 {
-  int		test;
-
-  if ((test = my_getnbr(str)) <= 0 || test > h)
+  if (!check_tab(allum, h))
     {
-      write(1, "Error: this line is out of range\n", 34);
-      return (0);
+      if (player)
+	write(1, "You lost, too bad..\n", 20);
+      else
+	write(1, "I lost.. snif.. but I'll get you next time!!\n", 45);
+      return (1);
     }
-  if (allum[test] <= 0)
-    {
-      write(1, "Error: this line is empty\n", 27);
-      return (0);
-    }
-  return (test);
+  return (0);
 }
 
-int		verif_nballum(char *str, int *allum, int line)
-{
-  int		test;
-
-  if ((test = my_getnbr(str)) > allum[line])
-    {
-      write(1, "Error: not enough match(es) on this line\n", 43);
-      return (0);
-    }
-  if (test <= 0)
-    {
-      write(1, "Error: you have to remove at least one match\n", 46);
-      return (0);
-    }
-  return (test);
-}
-
-int		check_tab(int *allum, int h)
+int		*copy_tab(int *allum, int h)
 {
   int		i;
-  int		total;
+  int		*copy;
 
-  total = 0;
-  i = -1;
-  while (++i < h + 2)
-    total += allum[i];
-  return (total);
-}		
-
-void		launch_game(char **tab, int *allum, int h)
-{
-  char		*answer;
-  int		line;
-  int		nb;
-
-  write(1, "\nYour turn:\n", 13);
-  write(1, "Line: ", 6);
-  while ((answer = get_next_line(0)))
-    {
-      if ((line = verif_line(answer, allum, h)))
-	break;
-      write(1, "Line: ", 6);
-    }
-  write(1, "Matches: ", 9);
-  while ((answer = get_next_line(0)))
-    {
-      if ((nb = verif_nballum(answer, allum, line)))
-	  break;
-      write(1, "Matches: ", 9);
-    }
-  allum[line] -= nb;
-  set_tab(tab, allum, h);
-  show_tab(tab);
+  if (!(copy = malloc(sizeof(int) * (h + 3))))
+    return (NULL);
+  copy[0] = 0;
+  copy[h + 1] = 0;
+  copy[h + 2] = -1;
+  i = 0;
+  while (++i < h + 1)
+    copy[i] = allum[i];
+  return (copy);
 }
 
 char		allum(int h)
 {
   char		**tab;
   int		*allum;
+  int		error;
 
-  if (!(tab = init_tab(h)) ||
-      !(allum = tab_allum(h)))
+  if (!(tab = init_tab(h)) || !(allum = tab_allum(h)))
     return (1);
   set_tab(tab, allum, h);
   show_tab(tab);
   while (check_tab(allum, h))
-    launch_game(tab, allum, h);
+    if ((error = launch_game(tab, allum, h)) ||
+	(error = ia_turn(tab, allum, h)))
+      return ((error == 1) ? 1 : 0);
   free_tabs(tab, allum);
   return (0);
 }
@@ -104,15 +64,15 @@ int		main(int ac, char **av)
 {
   int		nb;
 
+  srand(time(0));
   if (ac < 2)
     {
-      if (allum(3))
+      if (allum(4))
 	return (1);
     }
   else
     {
-      if ((nb = my_getnbr(av[1])) < 1 ||
-	  allum(nb))
+      if ((nb = my_getnbr(av[1])) < 1 || allum(nb))
 	return (1);
     }
   return (0);

@@ -5,8 +5,10 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Oct 12 19:01:57 2015 marc brout
-** Last update Sat Oct 17 10:17:03 2015 marc brout
+** Last update Wed Feb 10 17:50:49 2016 marc brout
 */
+
+#include <stdio.h>
 
 int		my_getnbr(char *str)
 {
@@ -16,6 +18,8 @@ int		my_getnbr(char *str)
 
   i = 0;
   isneg = 1;
+  if (!(str) || str == NULL)
+    return (-1);
   while ((str[i] == '-') || (str[i] == '+'))
     {
       if (str[i] == '-')
@@ -25,10 +29,12 @@ int		my_getnbr(char *str)
   total = 0;
   while ((str[i] >= '0') && (str[i] <= '9'))
     {
-      if (((total * 10) + (str[i] - 48)) > 2147483647)
-	return (0);
+      if (((total * 10) + (str[i] - 48)) >= 2147483647)
+	return (-1);
       total = ((total * 10) + (str[i] - 48));
       i = i + 1;
     }
+  if (str[i] != 0)
+    return (-1);
   return (total * isneg);
 }

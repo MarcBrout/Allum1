@@ -5,14 +5,18 @@
 ## Login   <brout_m@epitech.net>
 ## 
 ## Started on  Mon Feb  8 16:54:00 2016 marc brout
-## Last update Mon Feb  8 19:15:11 2016 marc brout
+## Last update Wed Feb 10 18:22:12 2016 marc brout
 ##
 
 SRCP	= ./src/
 
 SRC     = $(SRCP)allum.c \
 	$(SRCP)my_getnbr.c \
+	$(SRCP)my_put_nbr.c \
 	$(SRCP)get_next_line.c \
+	$(SRCP)check.c \
+	$(SRCP)ia.c \
+	$(SRCP)player.c \
 	$(SRCP)tabs.c
 
 OBJS    = $(SRC:.c=.o)

@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 18:10:03 2016 marc brout
-** Last update Mon Feb  8 19:14:42 2016 marc brout
+** Last update Wed Feb 10 17:03:32 2016 marc brout
 */
 
 #include <unistd.h>
@@ -20,6 +20,7 @@ int		*tab_allum(int h)
   if (!(tab = malloc(sizeof(int) * (h + 3))))
     return (NULL);
   tab[0] = 0;
+  tab[h + 1] = 0;
   tab[h + 2] = -1;
   i = 1;
   tab[1] = 1;
