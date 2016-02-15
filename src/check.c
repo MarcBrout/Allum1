@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 22:01:59 2016 marc brout
-** Last update Wed Feb 10 18:32:09 2016 marc brout
+** Last update Mon Feb 15 18:37:43 2016 marc brout
 */
 
 #include <unistd.h>
@@ -49,8 +49,10 @@ int		verif_line(char *str, int *allum, int h)
 {
   int		test;
 
-  if ((test = my_getnbr(str)) <= 0)
+  if (!str || (test = my_getnbr(str)) <= 0)
     {
+      if (!str)
+	write(1, "\n", 1);
       write(1, "Error: invalid input (positive number expected)\n", 48);
       return (0);
     }
@@ -71,8 +73,10 @@ int		verif_nballum(char *str, int *allum, int line)
 {
   int		test;
 
-  if ((test = my_getnbr(str)) <= 0)
+  if (!str || (test = my_getnbr(str)) <= 0)
     {
+      if (!str)
+	write(1, "\n", 1);
       write(1, "Error: invalid input (positive number expected)\n", 48);
       return (0);
     }

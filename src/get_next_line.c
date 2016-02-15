@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Jan  4 10:27:46 2016 marc brout
-** Last update Tue Feb  9 15:06:53 2016 marc brout
+** Last update Mon Feb 15 18:37:20 2016 marc brout
 */
 
 #include "get_next_line.h"
@@ -56,8 +56,8 @@ char		*get_next_line(const int fd)
   int		j;
 
   str = NULL;
-  if ((fd < 0) || (j = -1) > 0 || READ_SIZE < 1 ||
-      (str = get_last_buff(buf, &r, &i, &j)) == NULL || buf[i] == 10)
+  if (((fd < 0) || (j = -1) > 0 || READ_SIZE < 1 ||
+       (str = get_last_buff(buf, &r, &i, &j)) == NULL || buf[i] == 10))
     return (str);
   size = j + 1;
   while (buf[i] != 10 && (r = read(fd, buf, READ_SIZE)) > 0 && (size += r))
@@ -71,5 +71,5 @@ char		*get_next_line(const int fd)
   if (size)
     return (str);
   free(str);
-  return (NULL);
+  return (((i = -1) && (r = -1)) ? NULL : NULL);
 }

@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Wed Feb 10 18:19:15 2016 marc brout
-** Last update Wed Feb 10 18:30:06 2016 marc brout
+** Last update Mon Feb 15 18:37:02 2016 marc brout
 */
 
 #include <unistd.h>
@@ -21,11 +21,11 @@ void		ask_player(t_ia *ia, int *allum, int h)
   bool = 1;
   while (bool)
     {
-      while ((answer = get_next_line(0)) &&
+      while (((answer = get_next_line(0)) || answer == NULL) &&
 	     !(ia->line = verif_line(answer, allum, h)))
 	write(1, "Line: ", 6);
       write(1, "Matches: ", 9);
-      if ((answer = get_next_line(0)) &&
+      if (((answer = get_next_line(0)) || answer == NULL) &&
 	  !(ia->nb = verif_nballum(answer, allum, ia->line)))
 	write(1, "Line: ", 6);
       else
