@@ -5,7 +5,7 @@
 ## Login   <brout_m@epitech.net>
 ## 
 ## Started on  Mon Feb  8 16:54:00 2016 marc brout
-## Last update Wed Feb 10 18:22:12 2016 marc brout
+## Last update Thu Feb 18 14:07:49 2016 marc brout
 ##
 
 SRCP	= ./src/
@@ -23,7 +23,7 @@ OBJS    = $(SRC:.c=.o)
 
 NAME    = allum1
 
-CC      = gcc -g
+CC      = gcc
 
 CFLAGS  =  -W -Wall -Werror
 

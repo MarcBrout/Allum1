@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 16:55:02 2016 marc brout
-** Last update Wed Feb 10 18:18:47 2016 marc brout
+** Last update Thu Feb 18 12:27:07 2016 marc brout
 */
 
 #ifndef ALLUM_H_
@@ -24,14 +24,14 @@ int my_getnbr(char *);
 
 char allum(int);
 char show_loser(int, int *, int);
-int *copy_tab(int *, int);
+void copy_tab(int *, int *, int);
 
 /*
 ** ARRAY FUNCTIONS : tabs.c
 */
 
 int *tab_allum(int);
-void free_tabs(char **, int *);
+void free_tabs(int *, char **, int *);
 void show_tab(char **);
 char **init_tab(int);
 void set_tab(char **, int *, int);
@@ -48,17 +48,18 @@ typedef struct		s_ia
 }			t_ia;
 
 void attrib_victory(t_ia *, int, int, int);
-char calc_path_to_victory(t_ia *, int *, int);
-char ia_turn(char **, int *, int);
-int first_line(int *, int);
+char calc_path_to_victory(int *, t_ia *, int *, int);
+char ia_turn(int *, char **, int *, int);
+int last_line(int *, int);
 int one_thousand_match(int *, int);
 
 /*
-** PLAYER FUCNTIONS : player.c
+** PLAYER FUNCTIONS : player.c
 */
 
 char launch_game(char **, int *, int);
 void ask_player(t_ia *, int *, int);
+void freestr(char *);
 
 /*
 ** CHECKING FUNCTIONS : check.c

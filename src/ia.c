@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Wed Feb 10 16:15:38 2016 marc brout
-** Last update Wed Feb 10 18:29:54 2016 marc brout
+** Last update Thu Feb 18 14:02:51 2016 marc brout
 */
 
 #include <unistd.h>
@@ -19,7 +19,9 @@ int		one_thousand_match(int *tab, int h)
   int		nb;
   int		test;
 
-  if ((test = is_it_over(0, tab, h)) >= 0)
+  if (check_tab(tab, h) >= 500)
+    return (-1);
+  if ((test = is_it_over(0, tab, h)) >= 100)
     return (test);
   while ((line = (rand() % h + 1)) && !(tab[line]));
   nb = rand() % tab[line] + 1;
@@ -44,54 +46,55 @@ void		attrib_victory(t_ia *ia, int ret, int line, int nb)
     }
 }
 
-char		calc_path_to_victory(t_ia *ia, int *allum, int h)
+char		calc_path_to_victory(int *copy, t_ia *ia, int *allum, int h)
 {
-  int		*copy;
   int		ret;
+  int		total;
   int		line;
   int		nb;
   int		matches;
 
-  line = 0;
+  line = h + 2;
   ia->victories = 0;
-  while (++line < h + 2 && !(nb = 0))
-    while (++nb <= allum[line])
-      {
-	matches = 1000;
-	ret = 0;
-	while (--matches >= 0)
-	  {
-	    if (!(copy = copy_tab(allum, h)))
-	      return (1);
-	    copy[line] -= nb;
-	    ret += one_thousand_match(copy, h);
-	    free(copy);
-	  }
-	attrib_victory(ia, ret, line, nb);
-      }
+  while (--line > 0)
+    {
+      nb = allum[line];
+      while (--nb > 0 && (matches = 1000) && !(total = 0))
+	{
+	  while (--matches >= 0)
+	    {
+	      copy_tab(copy, allum, h);
+	      copy[line] -= nb;
+	      if ((ret = one_thousand_match(copy, h)) < 0)
+		break;
+	      total += ret;
+	    }
+	  attrib_victory(ia, total, line, nb);
+	}
+    }
   return (0);
 }
 
-int		first_line(int *tab, int h)
+int		last_line(int *tab, int h)
 {
   int		i;
 
-  i = -1;
-  while (++i < h + 2)
+  i = h + 2;
+  while (--i > 0)
     if (tab[i] > 0)
       break;
   return (i);
 }
 
-char		ia_turn(char **tab, int *allum, int h)
+char		ia_turn(int * copy, char **tab, int *allum, int h)
 {
   t_ia		ia;
 
-  ia.line = first_line(allum, h);
-  ia.nb = 1;
+  ia.line = last_line(allum, h);
+  ia.nb = allum[ia.line];
   ia.victories = 0;
   write(1, "\nAI's turn...\n", 14);
-  if (calc_path_to_victory(&ia, allum, h))
+  if (calc_path_to_victory(copy, &ia, allum, h))
     return (1);
   allum[ia.line] -= ia.nb;
   print_end_turn(0, ia.line, ia.nb);
