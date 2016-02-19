@@ -5,13 +5,14 @@
 ## Login   <brout_m@epitech.net>
 ## 
 ## Started on  Mon Feb  8 16:54:00 2016 marc brout
-## Last update Thu Feb 18 14:07:49 2016 marc brout
+## Last update Thu Feb 18 14:27:30 2016 marc brout
 ##
 
 SRCP	= ./src/
 
 SRC     = $(SRCP)allum.c \
 	$(SRCP)my_getnbr.c \
+	$(SRCP)my_getnbr_line.c \
 	$(SRCP)my_put_nbr.c \
 	$(SRCP)get_next_line.c \
 	$(SRCP)check.c \

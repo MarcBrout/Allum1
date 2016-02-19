@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 18:10:03 2016 marc brout
-** Last update Thu Feb 18 11:14:14 2016 marc brout
+** Last update Fri Feb 19 01:51:22 2016 marc brout
 */
 
 #include <unistd.h>
@@ -29,7 +29,7 @@ int		*tab_allum(int h)
   return (tab);
 }
 
-void		free_tabs(int *cpy, char **tab, int *tabint)
+int		free_tabs(int *cpy, char **tab, int *tabint)
 {
   int		i;
 
@@ -39,6 +39,7 @@ void		free_tabs(int *cpy, char **tab, int *tabint)
   free(tab);
   free(cpy);
   free(tabint);
+  return (1);
 }
 
 void		show_tab(char **tab)

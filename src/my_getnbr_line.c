@@ -1,34 +1,24 @@
 /*
-** my_getnbr.c for my_getnbr.c in /home/brout_m/rendu/Piscine_C_J10
+** my_getnbr_line.c for allum1
 ** 
 ** Made by marc brout
 ** Login   <brout_m@epitech.net>
 ** 
-** Started on  Mon Oct 12 19:01:57 2015 marc brout
-** Last update Thu Feb 18 14:27:10 2016 marc brout
+** Started on  Thu Feb 18 14:13:43 2016 marc brout
+** Last update Thu Feb 18 14:29:23 2016 marc brout
 */
 
-#include <stdlib.h>
+#include <stdio.h>
 
-int		my_strlen(char *str)
+int		my_getnbr_line(char *str)
 {
-  int		i;
-
-  i = 0;
-  while (str && str[i])
-    i++;
-  return (i);
-}
-
-int		my_getnbr(char *str)
-{
-  unsigned int	total;
+  int		total;
   int		isneg;
   int		i;
 
   i = 0;
   isneg = 1;
-  if (str == NULL)
+  if (!(str) || str == NULL)
     return (-1);
   while ((str[i] == '-') || (str[i] == '+'))
     {
@@ -39,12 +29,12 @@ int		my_getnbr(char *str)
   total = 0;
   while ((str[i] >= '0') && (str[i] <= '9'))
     {
-      if (((total * 10) + (str[i] - 48)) >= 2147483647)
+      if (((total * 10) + (str[i] - 48)) > 10000)
 	return (-1);
       total = ((total * 10) + (str[i] - 48));
       i = i + 1;
     }
-  if (str[i] != 0)
+  if (str[i] != 0 || (total * isneg) < 0)
     return (-1);
   return (total * isneg);
 }

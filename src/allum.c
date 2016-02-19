@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 16:58:45 2016 marc brout
-** Last update Thu Feb 18 14:07:09 2016 marc brout
+** Last update Fri Feb 19 01:51:49 2016 marc brout
 */
 
 #include <time.h>
@@ -43,7 +43,8 @@ char		allum(int h)
   char		**tab;
   int		*copy;
   int		*allum;
-  int		error;
+  int		errorpl;
+  int		erroria;
 
   if (!(tab = init_tab(h)) || !(allum = tab_allum(h)) ||
       !(copy = malloc(sizeof(int) * (h + 3))))
@@ -51,15 +52,21 @@ char		allum(int h)
   set_tab(tab, allum, h);
   show_tab(tab);
   while (check_tab(allum, h))
-    if ((error = launch_game(tab, allum, h)) ||
-	(error = ia_turn(copy, tab, allum, h)))
+    if ((errorpl = launch_game(tab, allum, h)) ||
+	(erroria = ia_turn(copy, tab, allum, h)))
       {
-	if (error == 1)
-	  return (1);
-	free_tabs(copy, tab, allum);
-	return (0);
+	if (errorpl && free_tabs(copy, tab, allum))
+	  return (errorpl);
+	if (erroria && free_tabs(copy, tab, allum))
+	  return (erroria);
       }
   return (0);
+}
+
+int		my_printerror(char *str)
+{
+  write(2, str, my_strlen(str));
+  return (1);
 }
 
 int		main(int ac, char **av)
@@ -69,13 +76,17 @@ int		main(int ac, char **av)
   srand(time(0));
   if (ac < 2)
     {
-      if (allum(4))
-	return (1);
+      if ((nb = allum(4)) == 2)
+	return (my_printerror(MALLOC));
     }
   else
     {
-      if ((nb = my_getnbr(av[1])) < 1 || allum(nb))
-	return (1);
+      if ((nb = my_getnbr_line(av[1])) < 1)
+	return (my_printerror(USAGE));
+      if ((nb = allum(nb)) == 2)
+	return (my_printerror(MALLOC));
     }
+  if (nb == 3)
+    return (my_printerror(CTRL_D));
   return (0);
 }

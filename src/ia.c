@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Wed Feb 10 16:15:38 2016 marc brout
-** Last update Thu Feb 18 14:02:51 2016 marc brout
+** Last update Fri Feb 19 01:20:48 2016 marc brout
 */
 
 #include <unistd.h>
@@ -101,6 +101,6 @@ char		ia_turn(int * copy, char **tab, int *allum, int h)
   set_tab(tab, allum, h);
   show_tab(tab);
   if (show_loser(0, allum, h))
-    return (2);
+    return (4);
   return (0);
 }
