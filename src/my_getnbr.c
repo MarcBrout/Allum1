@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Oct 12 19:01:57 2015 marc brout
-** Last update Sat Feb 20 15:51:03 2016 marc brout
+** Last update Sat Feb 20 23:08:42 2016 marc brout
 */
 
 #include <stdlib.h>
@@ -28,7 +28,7 @@ int		my_getnbr(char *str)
 
   i = 0;
   isneg = 1;
-  if (str == NULL)
+  if (str == NULL || str[0] == '\0')
     return (-1);
   while ((str[i] == '-') || (str[i] == '+'))
     {
