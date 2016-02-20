@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Feb  8 22:01:59 2016 marc brout
-** Last update Thu Feb 18 23:48:40 2016 marc brout
+** Last update Sat Feb 20 15:41:41 2016 marc brout
 */
 
 #include <unistd.h>
@@ -51,12 +51,12 @@ int		verif_line(char *str, int *allum, int h)
 
   if (!str)
     return (-1);
-  if ((test = my_getnbr(str)) <= 0)
+  if ((test = my_getnbr(str)) < 0)
     {
       write(1, "Error: invalid input (positive number expected)\n", 48);
       return (0);
     }
-  if (test > h)
+  if (!test || test > h)
     {
       write(1, "Error: this line is out of range\n", 33);
       return (0);
@@ -75,17 +75,17 @@ int		verif_nballum(char *str, int *allum, int line)
 
   if (!str)
     return (-1);
-  if ((test = my_getnbr(str)) <= 0)
+  if ((test = my_getnbr(str)) < 0)
     {
       write(1, "Error: invalid input (positive number expected)\n", 48);
       return (0);
     }
   if (test > allum[line])
     {
-      write(1, "Error: not enough match(es) on this line\n", 41);
+      write(1, "Error: not enough matches on this line\n", 39);
       return (0);
     }
-  if (test <= 0)
+  if (!test)
     {
       write(1, "Error: you have to remove at least one match\n", 45);
       return (0);

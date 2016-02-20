@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Mon Oct 12 19:01:57 2015 marc brout
-** Last update Thu Feb 18 14:27:10 2016 marc brout
+** Last update Sat Feb 20 15:51:03 2016 marc brout
 */
 
 #include <stdlib.h>
@@ -40,7 +40,7 @@ int		my_getnbr(char *str)
   while ((str[i] >= '0') && (str[i] <= '9'))
     {
       if (((total * 10) + (str[i] - 48)) >= 2147483647)
-	return (-1);
+	return (2147483647);
       total = ((total * 10) + (str[i] - 48));
       i = i + 1;
     }

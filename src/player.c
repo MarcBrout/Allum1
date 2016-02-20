@@ -5,7 +5,7 @@
 ** Login   <brout_m@epitech.net>
 ** 
 ** Started on  Wed Feb 10 18:19:15 2016 marc brout
-** Last update Fri Feb 19 01:47:42 2016 marc brout
+** Last update Sat Feb 20 16:21:33 2016 marc brout
 */
 
 #include <unistd.h>
@@ -65,6 +65,6 @@ int		launch_game(char **tab, int *allum, int h)
   set_tab(tab, allum, h);
   show_tab(tab);
   if (show_loser(1, allum, h))
-    return (2);
+    return (1);
   return (0);
 }
